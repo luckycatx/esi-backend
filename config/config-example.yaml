@@ -1,0 +1,22 @@
+server:
+  host:
+  port:
+  ctx_timeout:
+
+mysql:
+  host:
+  port:
+  user:
+  pwd:
+  db_name:
+
+redis:
+  addr:
+  pwd:
+  db:
+
+token:
+  access_secret:
+  access_exp:
+  refresh_secret:
+  refresh_exp:
