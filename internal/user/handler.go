@@ -49,7 +49,9 @@ func (h *Handler) Login(c echo.Context) error {
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
-	return c.JSON(http.StatusOK, resp)
+	return c.JSON(http.StatusOK, map[string]any{
+		"data": resp,
+	})
 }
 
 /* ----- */
@@ -79,7 +81,9 @@ func (h *Handler) Register(c echo.Context) error {
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
-	return c.JSON(http.StatusOK, resp)
+	return c.JSON(http.StatusOK, map[string]any{
+		"data": resp,
+	})
 }
 
 /* ----- */
@@ -99,7 +103,9 @@ func (h *Handler) Refresh(c echo.Context) error {
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
-	return c.JSON(http.StatusOK, resp)
+	return c.JSON(http.StatusOK, map[string]any{
+		"data": resp,
+	})
 }
 
 /* ----- */
@@ -109,5 +115,7 @@ func (h *Handler) Profile(c echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
-	return c.JSON(http.StatusOK, resp)
+	return c.JSON(http.StatusOK, map[string]any{
+		"data": resp,
+	})
 }
