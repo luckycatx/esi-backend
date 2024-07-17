@@ -1,7 +1,9 @@
 package handler
 
 import (
+	"esi/internal/file"
 	"esi/internal/user"
+	"net/http"
 
 	"github.com/labstack/echo/v4"
 )
@@ -20,9 +22,13 @@ var _ UserHandler = (*user.Handler)(nil)
 /* ===== */ /* ===== */ /* ===== */
 
 type Handler struct {
-	User UserHandler
+	User   UserHandler
+	Upload http.Handler
 }
 
 func NewHandler(u UserHandler) *Handler {
-	return &Handler{User: u}
+	return &Handler{
+		User:   u,
+		Upload: file.UploadHandler(),
+	}
 }
