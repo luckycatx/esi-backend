@@ -9,11 +9,13 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
 	mw "github.com/labstack/echo/v4/middleware"
+	"golang.org/x/crypto/acme/autocert"
 )
 
 func NewRouter(cfg *conf.Config, h *handler.Handler, m *middleware.Middleware) *echo.Echo {
 	var e = echo.New()
 	e.HTTPErrorHandler = HTTPErrorHandler
+	e.AutoTLSManager.Cache = autocert.DirCache("/var/www/.cache")
 	e.Use(mw.LoggerWithConfig(mw.LoggerConfig{
 		Format:           "[ECHO] ${time_custom} | ${status} | ${latency_human} | ${remote_ip} | ${method} ${uri} | ${error}\n\n",
 		CustomTimeFormat: "2006/01/02 - 15:04:05",
@@ -49,7 +51,6 @@ func (v *Validator) Validate(s any) error {
 	return nil
 }
 
-// Error handler
 func HTTPErrorHandler(err error, c echo.Context) {
 	if c.Response().Committed {
 		return

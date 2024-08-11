@@ -16,5 +16,5 @@ func main() {
 	}
 	defer cleanup()
 
-	e.Logger.Fatal(e.Start(app.Cfg.Server.Host + ":" + app.Cfg.Server.Port))
+	e.Logger.Fatal(e.StartAutoTLS(app.Cfg.Server.Host + ":" + app.Cfg.Server.Port))
 }

@@ -17,7 +17,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-var ProviderSet = wire.NewSet(
+var set = wire.NewSet(
 	// pkg
 	token.NewRedisAdapter, token.NewToken,
 	// auth
@@ -30,6 +30,7 @@ var ProviderSet = wire.NewSet(
 	// Required fields binding
 	wire.FieldsOf(new(*bootstrap.App), "Cfg", "Mysql", "Redis"),
 	wire.FieldsOf(new(*conf.Config), "Token"),
+
 	// Interface implementation binding
 	wire.Bind(new(token.Blacklist), new(*token.RedisAdapter)),
 	wire.Bind(new(auth.TokenUtil), new(*token.Token)),
@@ -42,5 +43,5 @@ var ProviderSet = wire.NewSet(
 
 // TODO: Implement cleanup func
 func InitServer(app *bootstrap.App) (*echo.Echo, func(), error) {
-	panic(wire.Build(ProviderSet))
+	panic(wire.Build(set))
 }
