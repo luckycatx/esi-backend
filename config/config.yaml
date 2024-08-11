@@ -1,6 +1,6 @@
 server:
   host:
-  port: 8080
+  port: 443
   ctx_timeout:
 
 mysql:
@@ -20,4 +20,3 @@ token:
   access_exp:
   refresh_secret:
   refresh_exp:
-  
